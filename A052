@@ -1,0 +1,48 @@
+package practice;
+
+import java.util.Scanner;
+
+public class A052階段登り {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		int num = sc.nextInt() + 1;
+		int[] step = new int[num];
+		int[] up = new int[2];
+		up[0] = sc.nextInt();
+		up[1] = sc.nextInt();
+		int i = 0;
+		int count = 0;
+
+		if (1 <= num && num <= 200000 &&
+				1 <= up[0] && up[0] <= 100 && 1 <= up[1] && up[1] <= 100) {
+			for (i = 0; i < num; i++) {
+				step[i] = 0;
+			}
+		}
+		step[0] = 1;
+		step[num - 1] = 1;
+
+		for (i = up[0]; i < num; i += up[0]) {
+			step[i] = 1;
+		}
+		for (i = up[1]; i < num; i += up[0]) {
+			step[i] = 1;
+		}
+		for(i=0;i<num;i++) {
+			if(step[i]==1) {
+				if(i+up[0]<num) {step[i+up[0]]=1;}
+				if(i+up[1]<num) {step[i+up[1]]=1;}
+			}
+		}
+		
+		for (i = 0; i < num; i++) {
+			if (step[i] == 0) {
+				count++;
+			}
+		}
+    
+		System.out.println(count);
+	}
+}
